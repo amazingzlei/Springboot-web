@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>vue连接数据库实现增删改查</title>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}">
+    <script type="text/javascript" th:src="@{/static/js/vue/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/vue/axios.min.js}"></script>
+</head>
+<body>
+<div id="app01">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">车辆管理</h3>
+        </div>
+    </div>
+    <div class="panel-body form-inline">
+        <label>
+            Name:<input type="text" v-model="name" class="form-control" v-focus @keyup.f2="add">
+        </label>
+        <button class="btn btn-primary" @click="add">添加</button>
+    </div>
+    <table class="table table-bordered table-hover table-striped">
+        <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>price</td>
+            <td>opertion</td>
+        </tr>
+        <tr v-for="item in objlist" :key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    Vue.config.keyCodes.f2 = 113;
+    /* axios配置全局根地址 */
+    axios.defaults.baseURL = 'http://localhost:8080/mystudy/vue/';
+    var vm = new Vue({
+        el:"#app01",
+        data:{
+            objlist:[
+                {id:1,name:1,price:1}
+            ],
+            name:""
+        },
+        methods:{
+            getInfo:function () {
+                var _this = this;
+                axios.get("/getCar").then(function (data) {
+                    _this.objlist = data.data.data;
+                })
+            },
+            add:function () {
+                var _this = this;
+                axios.post("/addCar",{name:this.name}).then(function (data) {
+                    _this.getInfo();
+                    _this.name = "";
+                })
+            },
+            del:function (id) {
+                var _this = this;
+                axios.get("/delCar",{params:{id:id}}).then(function (data) {
+                    _this.getInfo();
+                })
+            }
+        },
+        /* 指令 */
+        directives:{
+            focus:{
+                inserted:function (el) {
+                    el.focus();
+                }
+            }
+        },
+        /* 生命周期函数 */
+        created:function () {
+            this.getInfo();
+        }
+    })
+</script>
+</html>

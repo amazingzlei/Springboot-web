@@ -1,0 +1,11 @@
+2019-06-10 15:28:07.387  INFO 7092 --- [main] c.f.s.SpringbootApplicationTests         : Starting SpringbootApplicationTests on a with PID 7092 (started by admin in F:\IDEAProject\Springboot01)
+2019-06-10 15:28:07.389 DEBUG 7092 --- [main] c.f.s.SpringbootApplicationTests         : Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-06-10 15:28:07.390  INFO 7092 --- [main] c.f.s.SpringbootApplicationTests         : No active profile set, falling back to default profiles: default
+2019-06-10 15:28:12.271  INFO 7092 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-10 15:28:13.249  INFO 7092 --- [main] c.f.s.SpringbootApplicationTests         : Started SpringbootApplicationTests in 7.092 seconds (JVM running for 9.436)
+2019-06-10 15:28:13.522 TRACE 7092 --- [main] c.f.s.SpringbootApplicationTests         : 这是trace级别的日志
+2019-06-10 15:28:13.522 DEBUG 7092 --- [main] c.f.s.SpringbootApplicationTests         : 这是debug级别的日志
+2019-06-10 15:28:13.522  INFO 7092 --- [main] c.f.s.SpringbootApplicationTests         : 这是info级别的日志
+2019-06-10 15:28:13.523  WARN 7092 --- [main] c.f.s.SpringbootApplicationTests         : 这是warn级别的日志
+2019-06-10 15:28:13.523 ERROR 7092 --- [main] c.f.s.SpringbootApplicationTests         : 这是error级别的日志
+2019-06-10 15:28:13.533  INFO 7092 --- [Thread-2] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'

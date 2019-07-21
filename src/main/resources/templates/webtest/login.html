@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>登录</title>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!-- font files  -->
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+    <link th:href="@{/static/css/style.css}" rel='stylesheet' type='text/css' media="all"/>
+
+    <script type="text/javascript" th:src="@{/static/js/jq/jquery-2.0.3.min.js}"></script>
+
+</head>
+<body style="background-image: url('../../web/static/images/back.JPG')">
+
+<div class="log">
+    <div class="content2" style="margin-top: 7%">
+        <h2 th:text="#{login.login}"></h2>
+        <form th:action="@{/user/loginsuccess}" method="post" id="loginForm">
+            <input type="text" name="wid" id="id" th:placeholder="#{login.worknumber}">
+            <input type="password" name="password" id="password" th:placeholder="#{login.password}">
+            <br>
+            <div class="button-row">
+                <button type="button" class="register"  id="btnSubmit" onclick="doSub()">[[#{login.login}]]</button>
+                <br>
+                <a  th:href="@{/login.html(l=zh_EN)}" class="btn btn-sm">中文</a>
+                <a  th:href="@{/login.html(l=en_US)}" class="btn btn-sm">English</a>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function doSub() {
+        var wid = $("#id").val();
+        if ($("#id").val() == "") {
+            alert("请输入工号!")
+        } else if ($("#password").val() == "") {
+            alert("请输入密码!")
+        } else {
+            var url = "[[@{/user/login}]]";
+            var data = $("#loginForm").serialize();
+            $.ajax({
+                url: url,
+                type: "post",
+                data: data,
+                dataType: "json",
+                success: function (data) {
+                    if (data == 200) {
+                        //登录成功。跳转页面
+                        $("#loginForm").submit();
+                    } else {
+                        alert("登录失败")
+                    }
+                },
+            })
+        }
+    }
+</script>
+</html>
